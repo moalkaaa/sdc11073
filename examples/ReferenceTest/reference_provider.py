@@ -160,6 +160,26 @@ def run_provider():
     value_operation = prov.mdib.descriptions.handle.get_one('numeric.ch0.vmd1_sco_0')
     string_operation = prov.mdib.descriptions.handle.get_one('enumstring.ch0.vmd1_sco_0')
 
+    # Change the Description
+    with prov.mdib.transaction_manager() as mgr:
+        descriptor = prov.mdib.descriptions.handle.get_one('numeric.ch1.vmd0')
+        descriptor.Description = 'New description'
+
+       # Change the Description
+    with prov.mdib.transaction_manager() as mgr:
+        descriptor = prov.mdib.descriptions.handle.get_one('ac0.mds0')
+        descriptor.Description = 'New description'
+
+       # Change the Description
+    with prov.mdib.transaction_manager() as mgr:
+        descriptor = prov.mdib.descriptions.handle.get_one('numeric.ch0.vmd1_sco_0')
+        descriptor.Description = 'New description'
+
+       # Change the Description
+    with prov.mdib.transaction_manager() as mgr:
+        descriptor = prov.mdib.descriptions.handle.get_one('enumstring.ch0.vmd1_sco_0')
+        descriptor.Description = 'New description'
+
     with prov.mdib.transaction_manager() as mgr:
         state = mgr.get_state(value_operation.OperationTarget)
         if not state.MetricValue:

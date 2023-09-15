@@ -109,15 +109,29 @@ def run_ref_test():
     metric_updates = defaultdict(list)
     alert_updates = defaultdict(list)
 
+    # Initialize old_descriptions as an empty dictionary
+    old_descriptions = {}
+    # Initialize old_alert_descriptions as an empty dictionary
+    old_alert_descriptions = {}
+
+
     def onMetricUpdates(metricsbyhandle):
         print('onMetricUpdates', metricsbyhandle)
         for k, v in metricsbyhandle.items():
             metric_updates[k].append(v)
+            print(f'Metric {k} updated: {v}')
+            if v.Description != old_descriptions.get(k):
+                print(f'Description of metric {k} has changed')
+                old_descriptions[k] = v.Description
 
     def onAlertUpdates(alertsbyhandle):
         print('onAlertUpdates', alertsbyhandle)
         for k, v in alertsbyhandle.items():
             alert_updates[k].append(v)
+            print(f'Alert {k} updated: {v}')
+            if v.Description != old_alert_descriptions.get(k):
+                print(f'Description of alert {k} has changed')
+                old_alert_descriptions[k] = v.Description
 
     observableproperties.bind(mdib, metrics_by_handle=onMetricUpdates)
     observableproperties.bind(mdib, alert_by_handle=onAlertUpdates)
