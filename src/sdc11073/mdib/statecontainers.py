@@ -219,6 +219,10 @@ class AbstractMetricStateContainer(AbstractStateContainer):
 
 class NumericMetricStateContainer(AbstractMetricStateContainer):
     """Represents NumericMetricState in BICEPS."""
+    
+    def __init__(self, *args, **kwargs):
+       super().__init__(*args, **kwargs)
+       self.Description = "Your description here"
 
     NODETYPE = pm.NumericMetricState
     MetricValue: pm_types.NumericMetricValue | None = x_struct.SubElementProperty(pm.MetricValue,
@@ -239,6 +243,10 @@ class NumericMetricStateContainer(AbstractMetricStateContainer):
 
 class StringMetricStateContainer(AbstractMetricStateContainer):
     """Represents StringMetricState in BICEPS."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.Description = "Your description here"
 
     NODETYPE = pm.StringMetricState
     MetricValue: pm_types.StringMetricValue | None = x_struct.SubElementProperty(pm.MetricValue,
@@ -441,6 +449,10 @@ class AbstractAlertStateContainer(AbstractStateContainer):
 class AlertSystemStateContainer(AbstractAlertStateContainer):
     """Represents AlertSystemState in BICEPS."""
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.Description = "Your description here"
+
     NODETYPE = pm.AlertSystemState
     SystemSignalActivation: list[pm_types.SystemSignalActivation] = x_struct.SubElementListProperty(
         pm.SystemSignalActivation,
@@ -489,6 +501,10 @@ class AlertSignalStateContainer(AbstractAlertStateContainer):
 class AlertConditionStateContainer(AbstractAlertStateContainer):
     """Represents AlertConditionState in BICEPS."""
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.Description = "Your description here"
+        
     is_alert_condition = True
     NODETYPE = pm.AlertConditionState
     ActualConditionGenerationDelay: DurationType | None = x_struct.DurationAttributeProperty(
